@@ -1,0 +1,10 @@
+spring:
+    datasource:
+        password: springtest
+        username: springtest
+        url: jdbc:postgresql://localhost:5432/e_commerce
+
+    jpa:
+        hibernate:
+            ddl-auto: create-drop
+        show-sql: true
