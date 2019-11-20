@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.util.List;
 
@@ -31,15 +30,15 @@ public class Categorie {
     @OneToMany(mappedBy = "categorie")
     private List<Produit> produits;
 
-    @OneToOne
-    private Rayon rayon;
+    @OneToMany(mappedBy = "categorie")
+    private List<Rayon> rayons;
 
     public Categorie() {
+
     }
 
-    public Categorie(String nomCategorie, Rayon rayon) {
+    public Categorie(String nomCategorie) {
         this.nomCategorie = nomCategorie;
-        this.rayon = rayon;
     }
 
     public Long getIdCategorie() {
@@ -66,11 +65,4 @@ public class Categorie {
         this.produits = produits;
     }
 
-    public Rayon getRayon() {
-        return rayon;
-    }
-
-    public void setRayon(Rayon rayon) {
-        this.rayon = rayon;
-    }
 }

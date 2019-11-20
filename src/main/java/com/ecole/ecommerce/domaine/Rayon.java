@@ -13,14 +13,24 @@ public class Rayon {
     @Column(name = "nom_rayon", nullable = false, unique = true)
     private String nomRayon;
 
-   /* @OneToOne(mappedBy = "rayon")
-    private Categorie categorie;*/
+    /**
+     * Sur un rayon on pose les produits d'une catégorie donnée
+     * On peut créer des rayons sans catégories et les remplir après
+     * un rayon à un moment donné ne peut contenir que les produits d'une même catégorie
+     */
+   @OneToOne
+    private Categorie categorie;
 
     public Rayon() {
     }
 
     public Rayon(String nomRayon) {
         this.nomRayon = nomRayon;
+    }
+
+    public Rayon(String nomRayon, Categorie categorie) {
+        this.nomRayon = nomRayon;
+        this.categorie = categorie;
     }
 
     public Long getIdRayon() {
@@ -39,11 +49,18 @@ public class Rayon {
         this.nomRayon = nomRayon;
     }
 
-    /*public Categorie getCategorie() {
+    public Categorie getCategorie() {
         return categorie;
     }
 
     public void setCategorie(Categorie categorie) {
         this.categorie = categorie;
+    }
+
+    /**
+     * Fonction pour vider un rayon
+     */
+    /*public void unCategorized(){
+        this.setCategorie(null);
     }*/
 }

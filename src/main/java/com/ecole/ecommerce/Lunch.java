@@ -1,3 +1,4 @@
+/*
 package com.ecole.ecommerce;
 
 import com.ecole.ecommerce.domaine.Categorie;
@@ -31,19 +32,22 @@ public class Lunch implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+
+        Categorie laits = new Categorie("Produits laitiers");
+        Categorie decorations = new Categorie("Décorations");
+        Categorie jouets = new Categorie("Jouets");
+        Categorie arbres_noel = new Categorie("Arbres de noël");
+
+        categorieRepository.saveAll(Arrays.asList(laits, decorations, arbres_noel, jouets));
+
         Rayon r1 = new Rayon("R-lait");
         Rayon r2 = new Rayon("R-déco");
         Rayon r3 = new Rayon("R-arbre");
         Rayon r4 = new Rayon("R-Jouet");
+
+        r1.setCategorie(laits);
         rayonRepository.saveAll(Arrays.asList(r1, r2, r3, r4));
-
-        Categorie laits = new Categorie("Produits laitiers", r1);
-        Categorie decorations = new Categorie("Décorations", r2);
-        Categorie jouets = new Categorie("Jouets", r4);
-        Categorie arbres_noel = new Categorie("Arbres de noël", r3);
-
-        categorieRepository.saveAll(Arrays.asList(laits, decorations, arbres_noel));
-
+        //r1.unCategorized();
 
         clientRepository.save(new Client("PADONOU","Hugues","padonouisidore7@gmail.com", "31557600"));
 
@@ -52,3 +56,4 @@ public class Lunch implements CommandLineRunner {
         produitRepository.save(new Produit("Camion de pompier", 12000, jouets, 8));
     }
 }
+*/
