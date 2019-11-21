@@ -2,24 +2,19 @@ package com.ecole.ecommerce.web;
 
 import com.ecole.ecommerce.domaine.Client;
 import com.ecole.ecommerce.services.ClientService;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-public class ClientResources {
+public class ClientResource {
 
     private final ClientService clientService;
 
-    public ClientResources(ClientService clientService) {
+    public ClientResource(ClientService clientService) {
         this.clientService = clientService;
     }
 
@@ -32,7 +27,7 @@ public class ClientResources {
     ///////  A revoir  /////////
     ////////////////////////////
     @PostMapping(value = "/clients")
-    public ResponseEntity<List<Client>> saveAll(List<Client> clients){
+    public ResponseEntity<List<Client>> saveAll(@RequestBody List<Client> clients){
         return new ResponseEntity<>(clientService.saveAll(clients), HttpStatus.CREATED);
     }
 
@@ -72,4 +67,13 @@ public class ClientResources {
         clientService.deleteMany(clients);
     }
 
+    @GetMapping("/countClient")
+    public Long count(){
+        return clientService.count();
+    }
+
+    @GetMapping("/existClient/{id}")
+    public boolean exist(@PathVariable("id") Long id){
+        return clientService.existsById(id);
+    }
 }
