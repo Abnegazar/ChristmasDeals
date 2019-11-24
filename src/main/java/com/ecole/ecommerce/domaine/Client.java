@@ -1,9 +1,11 @@
 package com.ecole.ecommerce.domaine;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name="client", uniqueConstraints = @UniqueConstraint(columnNames = {"mail", "password"}))
+@Table(name="client", uniqueConstraints = @UniqueConstraint(columnNames = {"mail", "mot_de_passe"}))
+//la paire " mot-de-passe _ email " doit être unique
 public class Client {
 
     @Id
@@ -19,7 +21,7 @@ public class Client {
     @Column(name = "mail", length = 40, nullable = false)
     private String mail;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "mot_de_passe", nullable = false)
     private String motDePasse;
 
     @Column(name = "num_carte_credit")
@@ -33,6 +35,9 @@ public class Client {
 
     @Column(name = "adresse_livraison")
     private String adresseLivraison;
+
+    @OneToMany(mappedBy = "client")
+    private List<Commande> commandes;
 
     public Client() {
     }
@@ -139,4 +144,6 @@ public class Client {
     public void setAdresseLivraison(String adresseLivraison) {
         this.adresseLivraison = adresseLivraison;
     }
+
+
 }

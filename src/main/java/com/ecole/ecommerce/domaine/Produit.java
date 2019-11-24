@@ -1,6 +1,7 @@
 package com.ecole.ecommerce.domaine;
 
 import javax.persistence.*;
+import java.util.List;
 /*import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.text.SimpleDateFormat;
@@ -17,6 +18,9 @@ public class Produit {
     @Column(name = "nom_produit", nullable = false)
     private String nomProduit;
 
+    @Column(name = "marque", nullable = false)
+    private String marque;
+
     @Column(name = "description")
     private String description;
 
@@ -26,7 +30,7 @@ public class Produit {
     @Column(name = "nouveaute")
     private boolean nouveaute;
 
-    @Column(name = "quantite")
+    @Column(name = "quantite", nullable = false)
     private int quantite;
 
     /**
@@ -34,6 +38,9 @@ public class Produit {
      */
     @ManyToOne(optional = false)
     private Categorie categorie;
+
+    @OneToMany(mappedBy = "produit")
+    private List<LigneCommande> ligneCommandes;
 
     /**
      * Définit l'ancienneté du produit dans le magasin
@@ -44,9 +51,10 @@ public class Produit {
         nouveaute = true;
     }
 
-    public Produit(String nomProduit, String description, double prix, boolean nouveaute, Categorie categorie, int quantite) {
+    public Produit(String nomProduit, String description, String marque, double prix, boolean nouveaute, Categorie categorie, int quantite) {
         this.nomProduit = nomProduit;
         this.description = description;
+        this.marque = marque;
         this.quantite = quantite;
         this.prix = prix;
         this.categorie = categorie;
@@ -54,17 +62,19 @@ public class Produit {
         this.nouveaute = nouveaute;
     }
 
-    public Produit(String nomProduit, String description, double prix, int quantite) {
+    public Produit(String nomProduit, String description, String marque, double prix, int quantite) {
         this.nomProduit = nomProduit;
         this.description = description;
+        this.marque = marque;
         this.prix = prix;
         this.quantite = quantite;
         nouveaute = true;
     }
 
-    public Produit(String nomProduit, double prix, Categorie categorie, int quantite) {
+    public Produit(String nomProduit, double prix, String marque, Categorie categorie, int quantite) {
         this.nomProduit = nomProduit;
         this.prix = prix;
+        this.marque = marque;
         this.quantite = quantite;
         this.categorie = categorie;
         nouveaute = true;
@@ -125,4 +135,13 @@ public class Produit {
     public void setCategorie(Categorie categorie) {
         this.categorie = categorie;
     }
+
+    public String getMarque() {
+        return marque;
+    }
+
+    public void setMarque(String marque) {
+        this.marque = marque;
+    }
+
 }

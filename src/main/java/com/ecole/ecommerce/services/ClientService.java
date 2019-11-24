@@ -2,7 +2,6 @@ package com.ecole.ecommerce.services;
 
 import com.ecole.ecommerce.domaine.Client;
 import com.ecole.ecommerce.repository.ClientRepository;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -54,11 +53,11 @@ public class ClientService {
 
     /**
      * Met à jour les informations d'un client particulier
-     * @param cli
+     * @param client
      * @return
      */
-    public Client update(Client cli){
-        return clientRepository.saveAndFlush(cli);
+    public Client update(Client client){
+        return clientRepository.saveAndFlush(client);
     }
 
     /**
