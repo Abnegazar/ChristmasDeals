@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Rayon {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idRayon;
 
     @Column(name = "nom_rayon", nullable = false, unique = true)

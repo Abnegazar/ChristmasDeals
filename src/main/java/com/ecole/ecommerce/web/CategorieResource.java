@@ -28,7 +28,7 @@ public class CategorieResource {
         return new ResponseEntity<>(categorieService.getOne(id), HttpStatus.FOUND);
     }
 
-    @GetMapping("/categorie")
+    @GetMapping("/categories")
     public ResponseEntity<List<Categorie>> getAll(){
         return new ResponseEntity<>(categorieService.getAll(), HttpStatus.OK);
     }

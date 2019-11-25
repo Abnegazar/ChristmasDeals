@@ -18,11 +18,11 @@ public class ClientService {
 
     /**
      * Ajouter un nouveau client
-     * @param cli
+     * @param client
      * @return
      */
-    public Client save(Client cli){
-       return clientRepository.save(cli);
+    public Client save(Client client){
+       return clientRepository.save(client);
     }
 
     /**

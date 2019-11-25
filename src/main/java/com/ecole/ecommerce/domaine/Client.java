@@ -9,13 +9,13 @@ import java.util.List;
 public class Client {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idClient;
 
-    @Column(name = "nom", length = 50, nullable = false)
+    @Column(name = "nom", length = 50)
     private String nom;
 
-    @Column(name = "prenom", length = 100, nullable = false)
+    @Column(name = "prenom", length = 100)
     private String prenom;
 
     @Column(name = "mail", length = 40, nullable = false)

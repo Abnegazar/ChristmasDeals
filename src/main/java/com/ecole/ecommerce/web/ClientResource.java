@@ -19,8 +19,8 @@ public class ClientResource {
     }
 
     @PostMapping(value = "/client")
-    public ResponseEntity<Client> save(@RequestBody Client cli){
-        return new ResponseEntity<>(clientService.save(cli), HttpStatus.CREATED);
+    public ResponseEntity<Client> save(@RequestBody Client client){
+        return new ResponseEntity<>(clientService.save(client), HttpStatus.CREATED);
     }
 
     /////////////////////////////
@@ -45,8 +45,8 @@ public class ClientResource {
     ///////  A revoir  /////////
     ////////////////////////////
     @PutMapping("/client")
-    public ResponseEntity<Client> update(Client cli){
-        return new ResponseEntity<>(clientService.update(cli), HttpStatus.OK);
+    public ResponseEntity<Client> update(Client client){
+        return new ResponseEntity<>(clientService.update(client), HttpStatus.OK);
     }
 
     @DeleteMapping("/client/{id}")

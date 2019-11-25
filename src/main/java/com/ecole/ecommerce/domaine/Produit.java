@@ -58,17 +58,18 @@ public class Produit {
         this.quantite = quantite;
         this.prix = prix;
         this.categorie = categorie;
-        this.nouveaute = true;
         this.nouveaute = nouveaute;
     }
 
-    public Produit(String nomProduit, String description, String marque, double prix, int quantite) {
+    public Produit(String nomProduit, String description, String marque, double prix, Categorie categorie, int quantite) {
         this.nomProduit = nomProduit;
         this.description = description;
         this.marque = marque;
-        this.prix = prix;
         this.quantite = quantite;
-        nouveaute = true;
+        this.prix = prix;
+        this.categorie = categorie;
+        this.nouveaute = true;
+        this.nouveaute = nouveaute;
     }
 
     public Produit(String nomProduit, double prix, String marque, Categorie categorie, int quantite) {
