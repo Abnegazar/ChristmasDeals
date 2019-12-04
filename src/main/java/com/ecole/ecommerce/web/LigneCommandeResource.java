@@ -4,7 +4,13 @@ import com.ecole.ecommerce.domaine.LigneCommande;
 import com.ecole.ecommerce.services.LigneCommandeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
@@ -41,12 +47,13 @@ public class LigneCommandeResource {
         return new ResponseEntity<>(ligneCommandeService.getAll(), HttpStatus.OK);
     }
 
-    /////////////////////////////
-    ///////  A revoir  /////////
-    ////////////////////////////
-    @PutMapping("/ligneCommande")
-    public ResponseEntity<LigneCommande> update(LigneCommande ligneCommande){
-        return new ResponseEntity<>(ligneCommandeService.update(ligneCommande), HttpStatus.OK);
+    @PutMapping("/ligneCommande/{id}")
+    public ResponseEntity<LigneCommande> update(LigneCommande ligneCommande, @PathVariable Long id){
+        if(exist(id)){
+            return new ResponseEntity<>(ligneCommandeService.update(ligneCommande), HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("/ligneCommande/{id}")

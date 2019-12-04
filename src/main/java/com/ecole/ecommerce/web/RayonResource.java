@@ -4,7 +4,13 @@ import com.ecole.ecommerce.domaine.Rayon;
 import com.ecole.ecommerce.services.RayonService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,9 +40,13 @@ public class RayonResource {
         return new ResponseEntity<>(rayonService.getAll(), HttpStatus.OK);
     }
 
-    @PutMapping("/rayon")
-    public ResponseEntity<Rayon> update(Rayon rayon){
-        return new ResponseEntity<>(rayonService.update(rayon), HttpStatus.OK);
+    @PutMapping("/rayon/{id}")
+    public ResponseEntity<Rayon> update(Rayon rayon, @PathVariable Long id){
+        if(exist(id)){
+            return new ResponseEntity<>(rayonService.update(rayon), HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("/rayon/{id}")

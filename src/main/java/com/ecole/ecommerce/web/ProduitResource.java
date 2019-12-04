@@ -4,7 +4,13 @@ import com.ecole.ecommerce.domaine.Produit;
 import com.ecole.ecommerce.services.ProduitService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,9 +40,13 @@ public class ProduitResource {
         return new ResponseEntity<>(produitService.getAll(), HttpStatus.OK);
     }
 
-    @PutMapping("/produit")
-    public ResponseEntity<Produit> update(Produit produit){
-        return new ResponseEntity<>(produitService.update(produit), HttpStatus.OK);
+    @PutMapping("/produit/{id}")
+    public ResponseEntity<Produit> update(Produit produit, @PathVariable Long id){
+        if(exist(id)){
+            return new ResponseEntity<>(produitService.update(produit), HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("/produit/{id}")
