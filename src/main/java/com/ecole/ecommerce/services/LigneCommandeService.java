@@ -26,15 +26,6 @@ public class LigneCommandeService {
     }
 
     /**
-     * Ajouter plusieurs ligneCommandes è la fois
-     * @param ligneCommandes
-     * @return
-     */
-    public List<LigneCommande> saveAll(List<LigneCommande> ligneCommandes){
-        return ligneCommandeRepository.saveAll(ligneCommandes);
-    }
-
-    /**
      * Récupérer les informations d'un ligneCommande
      * @param id
      * @return un ou zéro(dans le cas ou le ligneCommande n'existe pas) objets de type LigneCommande
@@ -73,14 +64,6 @@ public class LigneCommandeService {
      */
     public void deleteAll(){
         ligneCommandeRepository.deleteAll();
-    }
-
-    /***
-     * Supprime les informations de plusieurs ligneCommandes à la fois
-     * @param ligneCommandes
-     */
-    public void deleteMany(List<LigneCommande> ligneCommandes){
-        ligneCommandeRepository.deleteAll(ligneCommandes);
     }
 
     /**

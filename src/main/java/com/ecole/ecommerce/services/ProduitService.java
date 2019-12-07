@@ -5,7 +5,6 @@ import com.ecole.ecommerce.repository.ProduitRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProduitService {
@@ -24,31 +23,39 @@ public class ProduitService {
         return produitRepository.count();
     }
 
-    public boolean exist(Long id){
-        return produitRepository.existsById(id);
-    }
-
-    public Optional<Produit> getOne(Long id){
-        return produitRepository.findById(id);
+    public Produit getOne(String nomProduit){
+        return produitRepository.findByNomProduit(nomProduit);
     }
 
     public List<Produit> getAll(){
         return produitRepository.findAll();
     }
 
+    public List<Produit> getAllByMarque(String marque){
+        return produitRepository.findAllByMarque(marque);
+    }
+
     public Produit update(Produit produit){
         return produitRepository.saveAndFlush(produit);
     }
 
-    public void deleteOne(Long id){
-        produitRepository.deleteById(id);
-    }
-
-    public void deleteMany(List<Produit> produits){
-        produitRepository.deleteAll(produits);
+    public void deleteOne(String produit){
+        produitRepository.deleteByNomProduit(produit);
     }
 
     public void deleteAll(){
         produitRepository.deleteAll();
+    }
+
+    public void deleteAllByMarque(String marque){
+        produitRepository.deleteAllByMarque(marque);
+    }
+
+    public boolean existProduit(String nomProduit) {
+        return produitRepository.existsByNomProduit(nomProduit);
+    }
+
+    public boolean existMarque(String marque) {
+        return produitRepository.existsByMarque(marque);
     }
 }

@@ -5,7 +5,6 @@ import com.ecole.ecommerce.repository.CategorieRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CategorieService {
@@ -20,12 +19,8 @@ public class CategorieService {
         return categorieRepository.save(categorie);
     }
 
-    public List<Categorie> saveAll(List<Categorie> categories){
-        return categorieRepository.saveAll(categories);
-    }
-
-    public Optional<Categorie> getOne(Long id){
-        return categorieRepository.findById(id);
+    public Categorie getOne(String nomCategorie){
+        return categorieRepository.findByNomCategorie(nomCategorie);
     }
 
     public List<Categorie> getAll(){
@@ -36,12 +31,8 @@ public class CategorieService {
         return categorieRepository.saveAndFlush(categorie);
     }
 
-    public void deleteOne(Long id){
-        categorieRepository.deleteById(id);
-    }
-
-    public void deleteMany(List<Categorie> categories){
-        categorieRepository.deleteAll(categories);
+    public void deleteOne(String nomCategorie){
+        categorieRepository.deleteByNomCategorie(nomCategorie);
     }
 
     public void deleteAll(){
@@ -52,8 +43,8 @@ public class CategorieService {
         return categorieRepository.count();
     }
 
-    public boolean exist(Long id){
-        return categorieRepository.existsById(id);
+    public boolean exist(String nomCategorie){
+        return categorieRepository.existsByNomCategorie(nomCategorie);
     }
 }
 

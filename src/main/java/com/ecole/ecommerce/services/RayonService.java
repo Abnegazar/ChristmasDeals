@@ -5,7 +5,6 @@ import com.ecole.ecommerce.repository.RayonRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class RayonService {
@@ -24,12 +23,12 @@ public class RayonService {
         return rayonRepository.count();
     }
 
-    public boolean exist(Long id){
-        return rayonRepository.existsById(id);
+    public boolean exist(String nomRayon){
+        return rayonRepository.existsByNomRayon(nomRayon);
     }
 
-    public Optional<Rayon> getOne(Long id){
-        return rayonRepository.findById(id);
+    public Rayon getOne(String nomRayon){
+        return rayonRepository.findByNomRayon(nomRayon);
     }
 
     public List<Rayon> getAll(){
@@ -40,12 +39,8 @@ public class RayonService {
         return rayonRepository.saveAndFlush(rayon);
     }
 
-    public void deleteOne(Long id){
-        rayonRepository.deleteById(id);
-    }
-
-    public void deleteMany(List<Rayon> rayons){
-        rayonRepository.deleteAll(rayons);
+    public void deleteOne(String nomRayon){
+        rayonRepository.deleteByNomRayon(nomRayon);
     }
 
     public void deleteAll(){

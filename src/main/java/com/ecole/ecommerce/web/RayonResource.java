@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class RayonResource {
@@ -30,9 +29,9 @@ public class RayonResource {
         return new ResponseEntity<>(rayonService.save(rayon), HttpStatus.CREATED);
     }
 
-    @GetMapping("/rayon/{id}")
-    public ResponseEntity<Optional<Rayon>> getOne(@PathVariable("id") Long id){
-        return new ResponseEntity<>(rayonService.getOne(id), HttpStatus.FOUND);
+    @GetMapping("/rayon/{nomRayon}")
+    public ResponseEntity<Rayon> getOne(@PathVariable("nomRayon") String nomRayon){
+        return new ResponseEntity<>(rayonService.getOne(nomRayon), HttpStatus.FOUND);
     }
 
     @GetMapping("/rayon")
@@ -40,23 +39,28 @@ public class RayonResource {
         return new ResponseEntity<>(rayonService.getAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/countRayon")
+    public Long count(){
+        return rayonService.count();
+    }
+
+    @GetMapping("/existRayon/{nomRayon}")
+    public boolean exist(@PathVariable("nomRayon") String nomRayon){
+        return rayonService.exist(nomRayon);
+    }
+
     @PutMapping("/rayon/{id}")
-    public ResponseEntity<Rayon> update(Rayon rayon, @PathVariable Long id){
-        if(exist(id)){
+    public ResponseEntity<Rayon> update(Rayon rayon, @PathVariable String nomRayon){
+        if(exist(nomRayon)){
             return new ResponseEntity<>(rayonService.update(rayon), HttpStatus.OK);
         }else {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 
-    @DeleteMapping("/rayon/{id}")
-    public void deleteById(@PathVariable Long id){
-        rayonService.deleteOne(id);
-    }
-
-    @DeleteMapping("/rayon")
-    public void deleteMany(List<Rayon> rayons){
-        rayonService.deleteMany(rayons);
+    @DeleteMapping("/rayon/{nomRayon}")
+    public void deleteById(@PathVariable String nomRayon){
+        rayonService.deleteOne(nomRayon);
     }
 
     @DeleteMapping("/rayons")
@@ -64,13 +68,4 @@ public class RayonResource {
         rayonService.deleteAll();
     }
 
-    @GetMapping("/countRayon")
-    public Long count(){
-        return rayonService.count();
-    }
-
-    @GetMapping("/existRayon/{id}")
-    public boolean exist(@PathVariable("id") Long id){
-        return rayonService.exist(id);
-    }
 }

@@ -29,14 +29,6 @@ public class CommandeResource {
         return new ResponseEntity<>(commandeService.save(commande), HttpStatus.CREATED);
     }
 
-    /////////////////////////////
-    ///////  A revoir  /////////
-    ////////////////////////////
-    @PostMapping(value = "/commandes")
-    public ResponseEntity<List<Commande>> saveAll(@RequestBody List<Commande> commandes){
-        return new ResponseEntity<>(commandeService.saveAll(commandes), HttpStatus.CREATED);
-    }
-
     @GetMapping(value = "/commande/{id}")
     public ResponseEntity<Optional<Commande>> getOne(@PathVariable("id") Long id){
         return new ResponseEntity<>(commandeService.getOne(id), HttpStatus.FOUND);
@@ -45,6 +37,16 @@ public class CommandeResource {
     @GetMapping(value = "/commandes")
     public ResponseEntity<List<Commande>> getAll(){
         return new ResponseEntity<>(commandeService.getAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("/countCommande")
+    public Long count(){
+        return commandeService.count();
+    }
+
+    @GetMapping("/existCommande/{id}")
+    public boolean exist(@PathVariable("id") Long id){
+        return commandeService.existsById(id);
     }
 
     @PutMapping("/commande/{id}")
@@ -66,21 +68,4 @@ public class CommandeResource {
         commandeService.deleteAll();
     }
 
-    /////////////////////////////
-    ///////  A revoir  /////////
-    ////////////////////////////
-    @DeleteMapping("/commandes")
-    public void deleteMany(List<Commande> commandes){
-        commandeService.deleteMany(commandes);
-    }
-
-    @GetMapping("/countCommande")
-    public Long count(){
-        return commandeService.count();
-    }
-
-    @GetMapping("/existCommande/{id}")
-    public boolean exist(@PathVariable("id") Long id){
-        return commandeService.existsById(id);
-    }
 }

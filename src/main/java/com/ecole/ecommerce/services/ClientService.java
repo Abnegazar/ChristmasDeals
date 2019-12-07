@@ -26,21 +26,21 @@ public class ClientService {
     }
 
     /**
-     * Ajouter plusieurs clients è la fois
-     * @param clients
+     *
+     * @param nom
+     * @param Mail
      * @return
      */
-    public List<Client> saveAll(List<Client> clients){
-        return clientRepository.saveAll(clients);
+    public Client getOneByNomAndMail(String nom, String Mail){
+        return clientRepository.findByNomAndMail(nom, Mail);
     }
 
-    /**
-     * Récupérer les informations d'un client
-     * @param id
-     * @return un ou zéro(dans le cas ou le client n'existe pas) objets de type Client
-     */
-    public Optional<Client> getOne(Long id){
-        return clientRepository.findById(id);
+    public Client getOneByNom(String nom){
+        return clientRepository.findByNom(nom);
+    }
+
+    public Client getOneByMail(String mail){
+        return clientRepository.findByMail(mail);
     }
 
     /**
@@ -61,11 +61,20 @@ public class ClientService {
     }
 
     /**
-     * Supprime un client donné de la base de données
-     * @param id
+     *
+     * @param nom
+     * @param mail
      */
-    public void deleteOne(Long id){
-        clientRepository.deleteById(id);
+    public void deleteOne(String nom, String mail){
+        clientRepository.deleteByNomAndMail(nom, mail);
+    }
+
+    public void deleteOneByNom(String nom){
+        clientRepository.deleteByNom(nom);
+    }
+
+    public void deleteOneByMail(String mail){
+        clientRepository.deleteByMail(mail);
     }
 
     /**
@@ -92,12 +101,21 @@ public class ClientService {
     }
 
     /**
-     * Vérifie la présence ou non d'un client dans la base
-     * @param id
+     *
+     * @param nom
+     * @param mail
      * @return
      */
-    public boolean existsById(Long id){
-        return clientRepository.existsById(id);
+    public boolean exists(String nom, String mail){
+        return clientRepository.existsByNomAndMail(nom, mail);
+    }
+
+    public boolean existsByNom(String nom){
+        return clientRepository.existsByNom(nom);
+    }
+
+    public boolean existsByMail(String mail){
+        return clientRepository.existsByMail(mail);
     }
 
 }

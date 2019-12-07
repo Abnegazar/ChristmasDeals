@@ -4,6 +4,7 @@ import com.ecole.ecommerce.domaine.Commande;
 import com.ecole.ecommerce.repository.CommandeRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,15 +27,6 @@ public class CommandeService {
     }
 
     /**
-     * Ajouter plusieurs commandes è la fois
-     * @param commandes
-     * @return
-     */
-    public List<Commande> saveAll(List<Commande> commandes){
-        return commandeRepository.saveAll(commandes);
-    }
-
-    /**
      * Récupérer les informations d'un commande
      * @param id
      * @return un ou zéro(dans le cas ou le commande n'existe pas) objets de type Commande
@@ -50,6 +42,11 @@ public class CommandeService {
     public List<Commande> getAll(){
         return commandeRepository.findAll();
     }
+
+    public List<Commande> getAllByDate(Date dateCommande){
+        return commandeRepository.findAllByDateCommande(dateCommande);
+    }
+
 
     /**
      * Met à jour les informations d'un commande particulier
@@ -73,14 +70,6 @@ public class CommandeService {
      */
     public void deleteAll(){
         commandeRepository.deleteAll();
-    }
-
-    /***
-     * Supprime les informations de plusieurs commandes à la fois
-     * @param commandes
-     */
-    public void deleteMany(List<Commande> commandes){
-        commandeRepository.deleteAll(commandes);
     }
 
     /**

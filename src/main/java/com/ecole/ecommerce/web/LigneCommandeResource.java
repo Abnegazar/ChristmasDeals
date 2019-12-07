@@ -29,14 +29,6 @@ public class LigneCommandeResource {
         return new ResponseEntity<>(ligneCommandeService.save(ligneCommande), HttpStatus.CREATED);
     }
 
-    /////////////////////////////
-    ///////  A revoir  /////////
-    ////////////////////////////
-    @PostMapping(value = "/ligneCommandes")
-    public ResponseEntity<List<LigneCommande>> saveAll(@RequestBody List<LigneCommande> ligneCommandes){
-        return new ResponseEntity<>(ligneCommandeService.saveAll(ligneCommandes), HttpStatus.CREATED);
-    }
-
     @GetMapping(value = "/ligneCommande/{id}")
     public ResponseEntity<Optional<LigneCommande>> getOne(@PathVariable("id") Long id){
         return new ResponseEntity<>(ligneCommandeService.getOne(id), HttpStatus.FOUND);
@@ -45,6 +37,16 @@ public class LigneCommandeResource {
     @GetMapping(value = "/ligneCommandes")
     public ResponseEntity<List<LigneCommande>> getAll(){
         return new ResponseEntity<>(ligneCommandeService.getAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("/countLigneCommande")
+    public Long count(){
+        return ligneCommandeService.count();
+    }
+
+    @GetMapping("/existLigneCommande/{id}")
+    public boolean exist(@PathVariable("id") Long id){
+        return ligneCommandeService.existsById(id);
     }
 
     @PutMapping("/ligneCommande/{id}")
@@ -66,21 +68,4 @@ public class LigneCommandeResource {
         ligneCommandeService.deleteAll();
     }
 
-    /////////////////////////////
-    ///////  A revoir  /////////
-    ////////////////////////////
-    @DeleteMapping("/ligneCommandes")
-    public void deleteMany(List<LigneCommande> ligneCommandes){
-        ligneCommandeService.deleteMany(ligneCommandes);
-    }
-
-    @GetMapping("/countLigneCommande")
-    public Long count(){
-        return ligneCommandeService.count();
-    }
-
-    @GetMapping("/existLigneCommande/{id}")
-    public boolean exist(@PathVariable("id") Long id){
-        return ligneCommandeService.existsById(id);
-    }
 }

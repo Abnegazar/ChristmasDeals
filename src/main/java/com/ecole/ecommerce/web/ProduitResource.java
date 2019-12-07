@@ -4,16 +4,9 @@ import com.ecole.ecommerce.domaine.Produit;
 import com.ecole.ecommerce.services.ProduitService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class ProduitResource {
@@ -30,9 +23,13 @@ public class ProduitResource {
         return new ResponseEntity<>(produitService.save(produit), HttpStatus.CREATED);
     }
 
-    @GetMapping("/produit/{id}")
-    public ResponseEntity<Optional<Produit>> getOne(@PathVariable("id") Long id){
-        return new ResponseEntity<>(produitService.getOne(id), HttpStatus.FOUND);
+    @GetMapping("/produit-nom/{nomProduit}")
+    public ResponseEntity<Produit> getProduit(@PathVariable("nomProduit") String nomProduit){
+        if(existProduit(nomProduit)){
+            return new ResponseEntity<>(produitService.getOne(nomProduit), HttpStatus.FOUND);
+        }else{
+           return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/produit")
@@ -40,28 +37,9 @@ public class ProduitResource {
         return new ResponseEntity<>(produitService.getAll(), HttpStatus.OK);
     }
 
-    @PutMapping("/produit/{id}")
-    public ResponseEntity<Produit> update(Produit produit, @PathVariable Long id){
-        if(exist(id)){
-            return new ResponseEntity<>(produitService.update(produit), HttpStatus.OK);
-        }else {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @DeleteMapping("/produit/{id}")
-    public void deleteById(@PathVariable Long id){
-        produitService.deleteOne(id);
-    }
-
-    @DeleteMapping("/produit")
-    public void deleteMany(List<Produit> produits){
-        produitService.deleteMany(produits);
-    }
-
-    @DeleteMapping("/produits")
-    public void deleteAll(){
-        produitService.deleteAll();
+    @GetMapping("/produit-marque/{marque}")
+    public ResponseEntity<List<Produit>> getAllByMarque(@PathVariable("marque") String marque){
+        return new ResponseEntity<>(produitService.getAllByMarque(marque), HttpStatus.OK);
     }
 
     @GetMapping("/countProduit")
@@ -69,8 +47,38 @@ public class ProduitResource {
         return produitService.count();
     }
 
-    @GetMapping("/existProduit/{id}")
-    public boolean exist(@PathVariable("id") Long id){
-        return produitService.exist(id);
+    @GetMapping("/existProduit/{nomProduit}")
+    public boolean existProduit(@PathVariable("nomProduit") String nomProduit){
+        return produitService.existProduit(nomProduit);
     }
+
+    @GetMapping("/existMarque/{marque}")
+    public boolean existMarque(@PathVariable("marque") String marque){
+        return produitService.existMarque(marque);
+    }
+
+    @PutMapping("/produit/{nomProduit}")
+    public ResponseEntity<Produit> update(Produit produit, @PathVariable("nomProduit") String nomProduit){
+        if(existProduit(nomProduit)){
+            return new ResponseEntity<>(produitService.update(produit), HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/produit/{nomProduit}")
+    public void deleteById(@PathVariable String nomProduit){
+        produitService.deleteOne(nomProduit);
+    }
+
+    @DeleteMapping("/produits")
+    public void deleteAll(){
+        produitService.deleteAll();
+    }
+
+    @DeleteMapping("/produits/{marque}")
+    public void deleteAllByMarque(String marque){
+        produitService.deleteAllByMarque(marque);
+    }
+
 }

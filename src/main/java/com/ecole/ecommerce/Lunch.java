@@ -35,10 +35,10 @@ public class Lunch implements CommandLineRunner {
         clientRepository.saveAll(Arrays.asList(dansou, padonou, bossou, boan));
 
 
-        Categorie laits = new Categorie("Produits laitiers");
-        Categorie decorations = new Categorie("Décorations");
-        Categorie jouets = new Categorie("Jouets");
-        Categorie arbres_noel = new Categorie("Arbres de noël");
+        Categorie laits = new Categorie("laits");
+        Categorie decorations = new Categorie("deco");
+        Categorie jouets = new Categorie("jouets");
+        Categorie arbres_noel = new Categorie("Arbres_de_noël");
         categorieRepository.saveAll(Arrays.asList(laits, decorations, arbres_noel, jouets));
 
         Rayon r1 = new Rayon("R-lait");
