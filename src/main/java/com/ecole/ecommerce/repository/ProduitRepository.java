@@ -7,15 +7,15 @@ import java.util.List;
 
 public interface ProduitRepository extends JpaRepository<Produit, Long> {
 
-    public List<Produit> findAllByMarque(String marque);
+    List<Produit> findAllByMarque(String marque);
 
-    public Produit findByNomProduit(String nomProduitOrMarque);
+    Produit findByNomProduit(String nomProduitOrMarque);
 
-    public void deleteAllByMarque(String Marque);
+    void deleteAllByMarque(String Marque);
 
-    public void deleteByNomProduit(String nomProduitOrMarque);
+    void deleteByNomProduit(String nomProduitOrMarque);
 
-    public boolean existsByNomProduit(String nomProduit);
+    boolean existsByNomProduit(String nomProduit);
 
-    public boolean existsByMarque(String marque);
+    boolean existsByMarque(String marque);
 }

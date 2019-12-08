@@ -5,9 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RayonRepository extends JpaRepository<Rayon, Long> {
 
-    public Rayon findByNomRayon(String nomRayon);
+    Rayon findByNomRayon(String nomRayon);
 
-    public void deleteByNomRayon(String nomRayon);
+    void deleteByNomRayon(String nomRayon);
 
-    public boolean existsByNomRayon(String nomRayon);
+    boolean existsByNomRayon(String nomRayon);
 }

@@ -7,5 +7,5 @@ import java.util.Date;
 import java.util.List;
 
 public interface CommandeRepository extends JpaRepository<Commande, Long> {
-    public List<Commande> findAllByDateCommande(Date dateCommande);
+    List<Commande> findAllByDateCommande(Date dateCommande);
 }

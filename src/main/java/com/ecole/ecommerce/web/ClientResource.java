@@ -40,7 +40,6 @@ public class ClientResource {
     }
 
     @GetMapping(value = "/client-mail/{mail}")
-
     public ResponseEntity<Client> getOne(@PathVariable("mail") String mail){
         if(existByMail(mail)){
             return new ResponseEntity<>(clientService.getOneByMail(mail), HttpStatus.FOUND);

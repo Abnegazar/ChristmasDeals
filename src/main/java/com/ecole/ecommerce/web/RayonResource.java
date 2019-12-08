@@ -49,8 +49,8 @@ public class RayonResource {
         return rayonService.exist(nomRayon);
     }
 
-    @PutMapping("/rayon/{id}")
-    public ResponseEntity<Rayon> update(Rayon rayon, @PathVariable String nomRayon){
+    @PutMapping("/rayon/{nomRayon}")
+    public ResponseEntity<Rayon> update(Rayon rayon, @PathVariable("nomRayon") String nomRayon){
         if(exist(nomRayon)){
             return new ResponseEntity<>(rayonService.update(rayon), HttpStatus.OK);
         }else {

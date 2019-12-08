@@ -1,10 +1,15 @@
 package com.ecole.ecommerce;
 
-import com.ecole.ecommerce.domaine.*;
+import com.ecole.ecommerce.domaine.Categorie;
+import com.ecole.ecommerce.domaine.Client;
+import com.ecole.ecommerce.domaine.Produit;
+import com.ecole.ecommerce.domaine.Rayon;
+import com.ecole.ecommerce.domaine.Users;
 import com.ecole.ecommerce.repository.CategorieRepository;
 import com.ecole.ecommerce.repository.ClientRepository;
 import com.ecole.ecommerce.repository.ProduitRepository;
 import com.ecole.ecommerce.repository.RayonRepository;
+import com.ecole.ecommerce.repository.UsersRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -17,12 +22,14 @@ public class Lunch implements CommandLineRunner {
     private final RayonRepository rayonRepository;
     private final ClientRepository clientRepository;
     private final ProduitRepository produitRepository;
+    private final UsersRepository usersRepository;
 
-    public Lunch(CategorieRepository categorieRepository, RayonRepository rayonRepository, ClientRepository clientRepository, ProduitRepository produitRepository) {
+    public Lunch(CategorieRepository categorieRepository, RayonRepository rayonRepository, ClientRepository clientRepository, ProduitRepository produitRepository, UsersRepository usersRepository) {
         this.categorieRepository = categorieRepository;
         this.rayonRepository = rayonRepository;
         this.clientRepository = clientRepository;
         this.produitRepository = produitRepository;
+        this.usersRepository = usersRepository;
     }
 
     @Override
@@ -54,5 +61,12 @@ public class Lunch implements CommandLineRunner {
         Produit p2 = (new Produit("Quilles", "Des quilles rouges et blancs pour la décoration", "une marque quelconque", 2850, decorations, 52));
         Produit p3 = (new Produit("Sapin", 7000, "SapiNeo", arbres_noel, 120));
         produitRepository.saveAll(Arrays.asList(p1, p2, p3));
+
+        Users admin = new Users("admin", "admin", "admin");
+        Users superadmin = new Users("superadmin", "admin", "admin");
+        Users stand1 = new Users("user1", "password", "standard");
+        Users stand2 = new Users("user2", "user", "standard");
+        Users stand3 = new Users("user3", "user", "standard");
+        usersRepository.saveAll(Arrays.asList(admin, superadmin, stand1, stand2, stand3));
     }
 }
