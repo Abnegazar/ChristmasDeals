@@ -54,7 +54,6 @@ public class Lunch implements CommandLineRunner {
         Rayon r4 = new Rayon("R-Jouet");
         r1.setCategorie(laits);
         rayonRepository.saveAll(Arrays.asList(r1, r2, r3, r4));
-        //r1.unCategorized();
 
 
         Produit p1 = (new Produit("Boule de noel", "De magnifiques boules de noël", "une marque quelconque", 850, false, decorations, 500));
