@@ -44,7 +44,7 @@ public class Produit {
      * Un produit appartient à une et une seule catégorie
      */
     @ManyToOne(optional = false)
-    private Categorie categorie;
+    private Categorie categorieProduit;
 
     @OneToMany(mappedBy = "produit")
     private List<LigneCommande> ligneCommandes;
@@ -58,33 +58,33 @@ public class Produit {
         nouveaute = true;
     }
 
-    public Produit(String nomProduit, String description, String marque, double prix, boolean nouveaute, Categorie categorie, int quantite) {
+    public Produit(String nomProduit, String description, String marque, double prix, boolean nouveaute, Categorie categorieProduit, int quantite) {
         this.nomProduit = nomProduit;
         this.description = description;
         this.marque = marque;
         this.quantite = quantite;
         this.prix = prix;
-        this.categorie = categorie;
+        this.categorieProduit = categorieProduit;
         this.nouveaute = nouveaute;
     }
 
-    public Produit(String nomProduit, String description, String marque, double prix, Categorie categorie, int quantite) {
+    public Produit(String nomProduit, String description, String marque, double prix, Categorie categorieProduit, int quantite) {
         this.nomProduit = nomProduit;
         this.description = description;
         this.marque = marque;
         this.quantite = quantite;
         this.prix = prix;
-        this.categorie = categorie;
+        this.categorieProduit = categorieProduit;
         this.nouveaute = true;
         this.nouveaute = nouveaute;
     }
 
-    public Produit(String nomProduit, double prix, String marque, Categorie categorie, int quantite) {
+    public Produit(String nomProduit, double prix, String marque, Categorie categorieProduit, int quantite) {
         this.nomProduit = nomProduit;
         this.prix = prix;
         this.marque = marque;
         this.quantite = quantite;
-        this.categorie = categorie;
+        this.categorieProduit = categorieProduit;
         nouveaute = true;
     }
 
@@ -136,12 +136,12 @@ public class Produit {
         this.quantite = quantite;
     }
 
-    public Categorie getCategorie() {
-        return categorie;
+    public Categorie getCategorieProduit() {
+        return categorieProduit;
     }
 
-    public void setCategorie(Categorie categorie) {
-        this.categorie = categorie;
+    public void setCategorieProduit(Categorie categorieProduit) {
+        this.categorieProduit = categorieProduit;
     }
 
     public String getMarque() {

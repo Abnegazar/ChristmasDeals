@@ -61,6 +61,6 @@ public class Rayon {
      * Fonction pour vider un rayon
      */
     /*public void unCategorized(){
-        this.setCategorie(null);
+        this.setCategorieProduit(null);
     }*/
 }

@@ -27,7 +27,7 @@ public class Categorie {
     /**
      * Plusieurs produits peuvent appartenir à la même catégorie
      */
-    @OneToMany(mappedBy = "categorie")
+    @OneToMany(mappedBy = "categorieProduit")
     private List<Produit> produits;
 
     @OneToMany(mappedBy = "categorie")
