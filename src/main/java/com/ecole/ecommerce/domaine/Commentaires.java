@@ -21,7 +21,7 @@ public class Commentaires {
     private String Contenu;
 
     @Column(name = "date_commentaire")
-    private Date dateCommentaire;
+    private java.sql.Date dateCommentaire;
 
     @ManyToOne
     private Client auteur;
@@ -34,6 +34,13 @@ public class Commentaires {
 
     public Commentaires(String contenu, Client auteur, Produit produitConcerne) {
         Contenu = contenu;
+        this.auteur = auteur;
+        this.produitConcerne = produitConcerne;
+    }
+
+    public Commentaires(String contenu, java.sql.Date dateCommentaire, Client auteur, Produit produitConcerne) {
+        Contenu = contenu;
+        this.dateCommentaire = dateCommentaire;
         this.auteur = auteur;
         this.produitConcerne = produitConcerne;
     }
@@ -74,7 +81,7 @@ public class Commentaires {
         return dateCommentaire;
     }
 
-    public void setDateCommentaire(Date dateCommentaire) {
+    public void setDateCommentaire(java.sql.Date dateCommentaire) {
         this.dateCommentaire = dateCommentaire;
     }
 }

@@ -1,6 +1,13 @@
 package com.ecole.ecommerce.domaine;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
@@ -21,16 +28,16 @@ public class Notes {
     private Client auteur;
 
     @ManyToOne
-    private Produit produitConcerné;
+    private Produit produitConcerne;
 
     public Notes() {
     }
 
-    public Notes(int valeur, Date dateNote, Client auteur, Produit produitConcerné) {
+    public Notes(int valeur, Date dateNote, Client auteur, Produit produitConcerne) {
         this.valeur = valeur;
         this.dateNote = dateNote;
         this.auteur = auteur;
-        this.produitConcerné = produitConcerné;
+        this.produitConcerne = produitConcerne;
     }
 
     public Long getId() {
@@ -57,12 +64,12 @@ public class Notes {
         this.auteur = auteur;
     }
 
-    public Produit getProduitConcerné() {
-        return produitConcerné;
+    public Produit getProduitConcerne() {
+        return produitConcerne;
     }
 
-    public void setProduitConcerné(Produit produitConcerné) {
-        this.produitConcerné = produitConcerné;
+    public void setProduitConcerne(Produit produitConcerne) {
+        this.produitConcerne = produitConcerne;
     }
 
     public Date getDateNote() {

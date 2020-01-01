@@ -1,16 +1,11 @@
 package com.ecole.ecommerce;
 
-import com.ecole.ecommerce.domaine.Categorie;
-import com.ecole.ecommerce.domaine.Client;
-import com.ecole.ecommerce.domaine.Produit;
-import com.ecole.ecommerce.domaine.Rayon;
-import com.ecole.ecommerce.repository.CategorieRepository;
-import com.ecole.ecommerce.repository.ClientRepository;
-import com.ecole.ecommerce.repository.ProduitRepository;
-import com.ecole.ecommerce.repository.RayonRepository;
+import com.ecole.ecommerce.domaine.*;
+import com.ecole.ecommerce.repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.sql.Date;
 import java.util.Arrays;
 
 @Component
@@ -20,12 +15,14 @@ public class Lunch implements CommandLineRunner {
     private final RayonRepository rayonRepository;
     private final ClientRepository clientRepository;
     private final ProduitRepository produitRepository;
+    private final CommentairesRepository commentairesRepository;
 
-    public Lunch(CategorieRepository categorieRepository, RayonRepository rayonRepository, ClientRepository clientRepository, ProduitRepository produitRepository) {
+    public Lunch(CategorieRepository categorieRepository, RayonRepository rayonRepository, ClientRepository clientRepository, ProduitRepository produitRepository, CommentairesRepository commentairesRepository) {
         this.categorieRepository = categorieRepository;
         this.rayonRepository = rayonRepository;
         this.clientRepository = clientRepository;
         this.produitRepository = produitRepository;
+        this.commentairesRepository = commentairesRepository;
     }
 
     @Override
@@ -52,10 +49,17 @@ public class Lunch implements CommandLineRunner {
         rayonRepository.saveAll(Arrays.asList(r1, r2, r3, r4));
 
 
-        Produit p1 = (new Produit("Boule de noel", "De magnifiques boules de noël", "une marque quelconque", 850, false, decorations, 500));
-        Produit p2 = (new Produit("Quilles", "Des quilles rouges et blancs pour la décoration", "une marque quelconque", 2850, decorations, 52));
-        Produit p3 = (new Produit("Sapin", 7000, "SapiNeo", arbres_noel, 120));
+        Produit p1 = new Produit("Boule de noel", "De magnifiques boules de noël", "une marque quelconque", 850, false, decorations, 500);
+        Produit p2 = new Produit("Quilles", "Des quilles rouges et blancs pour la décoration", "une marque quelconque", 2850, decorations, 52);
+        Produit p3 = new Produit("Sapin", 7000, "SapiNeo", arbres_noel, 120);
         produitRepository.saveAll(Arrays.asList(p1, p2, p3));
+
+        Date d = new Date(200000);
+
+        Commentaires com1 = new Commentaires("tres bon produit :D !!!", dansou, p1);
+        Commentaires com2 = new Commentaires("pas mal la couleur jaune",d, dansou, p1);
+        commentairesRepository.saveAll(Arrays.asList(com1, com2));
+
 
     }
 }

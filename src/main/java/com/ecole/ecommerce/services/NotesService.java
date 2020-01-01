@@ -18,11 +18,32 @@ public class NotesService {
         return notesRepository.save(notes);
     }
 
-    public List<Notes> getAllByProductname(String produit){
-        return notesRepository.findAllByProduitConcerné(produit);
+    public List<Notes> getAllByProduit(String nomProduit){
+        return notesRepository.findAllByProduitConcerne(nomProduit);
     }
 
-    public Notes upadate(Notes notes){
+    public Notes getByAuteurAndProduitConcerne(String auteur, String nomProduit){
+        return notesRepository.findByAuteurAndProduitConcerne(auteur, nomProduit);
+    }
+
+    public Long countProduit(String auteur){
+        return notesRepository.countAllByProduitConcerne(auteur);
+    }
+
+    public boolean existProduit(String produitConcerne){
+        return notesRepository.existsByProduitConcerne(produitConcerne);
+    }
+
+    public boolean existAuteurProduit(String auteur, String produitConcerne){
+        return notesRepository.existsByAuteurAndProduitConcerne(auteur, produitConcerne);
+    }
+
+    public Notes updates(Notes notes){
         return notesRepository.saveAndFlush(notes);
     }
+
+    public void deleteAuteurProduit(String auteur, String produitConcerne){
+        notesRepository.deleteByAuteurAndProduitConcerne(auteur, produitConcerne);
+    }
+
 }
